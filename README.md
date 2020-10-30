@@ -1,24 +1,34 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Purpose of application
 
-Things you may want to cover:
 
-* Ruby version
+# Target Audience for application
 
-* System dependencies
 
-* Configuration
+# Tech Stack
 
-* Database creation
 
-* Database initialization
+# User Stories
 
-* How to run the test suite
+As a user I can see all the cards for sale on the index page
+As a user I can inspect individual cards (show page) to get description details from the index page
+As a user I can sell cards
+As a user I can browse cards buy critera (rookies, holgraphic, graded, team)
+As a user I can upload multiple images of my card for sale
+As a user I can securely buy cards (stripe)
+As a user I can add items to my cart
+As a user I can bid on auction items on the page
+As a user I can see sellers ratings and reviews
+As a user I can see a buyers rating and reviews
+As a user I can sell a similar item (edit form - new copy) to make it more convenient 
+As a user I can instant message/chat with a seller to ask them questions about an item
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+# Problem that needs solving
 
-* ...
+
+# Models (active record associations)
+
+
+
