@@ -1,6 +1,7 @@
 <h1>Sell Card</h1>
 
-<%= form_with scope: :cards, local: true do |form| %>
+<%= form_with scope: :card, url: cards_path, local: true do |form| %>
+      
     <p>
         <%= form.label :title %>
         <%= form.text_field :title %>

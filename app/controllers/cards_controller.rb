@@ -5,7 +5,7 @@ class CardsController < ApplicationController
     end
 
     def create
-        @card = Card.new(params(card_params))
+        @card = Card.new(card_params)
 
         if @card.save
             redirect_to @card
@@ -46,7 +46,6 @@ class CardsController < ApplicationController
 
     private
         def card_params
-            params.require(:card).permit(:title, :description,
-            :condition, :season, :manufacturer, :price)
+            params.require(:card).permit(:title, :description, :condition, :season, :manufacturer, :price)
         end
 end
