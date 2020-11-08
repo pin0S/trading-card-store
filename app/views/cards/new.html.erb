@@ -1,0 +1,36 @@
+<h1>Sell Card</h1>
+
+<%= form_with scope: :cards, local: true do |form| %>
+    <p>
+        <%= form.label :title %>
+        <%= form.text_field :title %>
+    </p>
+
+    <p>
+        <%= form.label :description %>
+        <%= form.text_area :description %>
+    </p>
+
+    <p>
+        <%= form.label :price %>
+        <%= form.number_field :price %>
+    </p>
+
+    <p>
+        <%= form.label :condition %>
+        <%= form.select :condition, Card::conditions %>
+    </p>
+
+    <p>
+        <%= form.label :manufacturer %>
+        <%= form.select :manufacturer, Card::manufacturers %>
+    </p>
+
+    <p>Placeholder for seasons list</p>
+    <p>Placeholder for teams list</p>
+    <p>Placeholder for image upload</p>
+
+    <%= form.submit "Sell Card"%>
+
+<% end %>
+    
