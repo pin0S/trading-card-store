@@ -11,6 +11,10 @@
         <button>Sell Similar PH</button>
         <p>Seller rating PH</p>
 
+        <%= link_to 'Destroy', card_path(card),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %>
+
     <% end %>    
 
     <p>placeholder related products</p>
