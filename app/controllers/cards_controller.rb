@@ -4,9 +4,6 @@ class CardsController < ApplicationController
         @cards = Card.all
     end
 
-    def new
-    end
-
     def create
         @card = Card.new(params(card_params))
 
@@ -17,13 +14,34 @@ class CardsController < ApplicationController
         end
     end
 
-    def show
+    def new
+    end
+
+    def update
         @card = Card.find(params[:id])
+
+        if @card.update(card_params)
+            redirect_to @card
+        else
+            render 'edit'
+        end
     end
 
     def edit
         @card = Card.find(params[:id])
     end
+
+    def show
+        @card = Card.find(params[:id])
+    end
+
+    def destroy
+        @card = Card.find(params[:id])
+        @article.destroy
+
+        redirect_to cards_path
+    end
+    
 
 
     private
