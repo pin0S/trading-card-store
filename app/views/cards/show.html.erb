@@ -1,0 +1,18 @@
+<img src="#" alt="placeholder for user image of card for sale">
+
+
+<div class="gird-container">
+    <%= @card.each do |attr| %>
+
+        <h2 class="card-title"><%= attr.title %></h2> 
+        <p class="card-description"><%= attr.description %></p>  
+        <h3 class="card-price"><%= attr.price %></h3>
+        <button>Buy Now PH</button>
+        <button>Sell Similar PH</button>
+        <p>Seller rating PH</p>
+
+    <% end %>    
+
+    <p>placeholder related products</p>
+</div>
+

@@ -1,7 +1,7 @@
 class CardsController < ApplicationController
 
     def index
-        # @cards = Cards.all
+        @cards = Card.all
     end
 
     def new
@@ -10,11 +10,18 @@ class CardsController < ApplicationController
     def create
         @card = Card.new(params(card_params))
 
-        @card.save
-        redirect_to @card
+        if @card.save
+            redirect_to @card
+        else
+            render 'new'
+        end
     end
 
     def show
+        @card = Card.find(params[:id])
+    end
+
+    def edit
         @card = Card.find(params[:id])
     end
 
