@@ -7,6 +7,7 @@ class CardsController < ApplicationController
     def create
         @card = Card.new(card_params)
         @card.save!
+       
         if @card.save
             redirect_to @card
         else
@@ -42,17 +43,16 @@ class CardsController < ApplicationController
 
     def destroy
         @card = Card.find(params[:id])
-        @article.destroy
+        @card.destroy
 
         redirect_to cards_path
     end
-    
-
 
     private
+
         def card_params
             params.require(:card).permit(:title, :description, :condition, 
                 :season_id, :manufacturer, :price, :picture, :team_id, 
-                :user_id)
+                :user_id).merge(user: current_user)
         end
 end

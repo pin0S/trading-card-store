@@ -37,12 +37,15 @@
         <%= form.select(:team_id, @teams.order(team: :asc).map{ |t| [t.team, t.id] }) %>
     </p>
 
+    <% form.hidden_field :user_id, value: current_user.id %>
+
     <p>
         <%= form.label :picture %>
         <%= form.file_field :picture, accept: 'image/png, image/jpg, image/jpeg' %>
-    </p>    
-   
+    </p>
 
+    
+   
     <%= form.submit "Sell Card"%>
 
 <% end %>

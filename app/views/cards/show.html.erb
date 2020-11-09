@@ -3,22 +3,20 @@
 
 <div class="gird-container">
     
-    <%= @card.each do |attr| %>
 
-    <%= image_tag attr.picture if attr.picture.attached? %>
+    <%= image_tag @card.picture if @card.picture.attached? %>
 
-        <h2 class="card-title"><%= attr.title %></h2> 
-        <p class="card-description"><%= attr.description %></p>  
-        <h3 class="card-price"><%= attr.price %></h3>
+        <h2 class="card-title"><%= @card.title %></h2> 
+        <p class="card-description"><%= @card.description %></p>  
+        <h3 class="card-price"><%= @card.price %></h3>
         <button>Buy Now PH</button>
         <button>Sell Similar PH</button>
         <p>Seller rating PH</p>
 
-        <%= link_to 'Destroy', card_path(card),
+        <%= link_to 'Destroy', card_path(@card),
               method: :delete,
               data: { confirm: 'Are you sure?' } %>
 
-    <% end %>    
 
     <p>placeholder related products</p>
 </div>
