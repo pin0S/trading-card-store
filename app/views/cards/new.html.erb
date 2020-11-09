@@ -28,11 +28,17 @@
     </p>
 
     <p>
-        <%= form.label :season %>
-        <%= form.select :season, Card::seasons %>
+        <%= form.label :season_id %>
+        <%= form.select(:season_id, @seasons.map{ |s| [s.years, s.id] }) %>
     </p>
+
+    <p>
+        <%= form.label :team_id %>
+        <%=  %>
+        <%= form.select(:team_id, @teams.order(team: :asc).map{ |t| [t.team, t.id] }) %>
+    </p>
+
     
-    <p>Placeholder for teams list</p>
     <p>Placeholder for image upload</p>
 
     <%= form.submit "Sell Card"%>

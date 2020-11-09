@@ -16,6 +16,8 @@ class CardsController < ApplicationController
 
     def new
         @card = Card.new
+        @seasons = Season.all
+        @teams = Team.all
     end
 
     def update
