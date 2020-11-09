@@ -2,7 +2,10 @@
 
 
 <div class="gird-container">
+    
     <%= @card.each do |attr| %>
+
+    <%= image_tag attr.picture if attr.picture.attached? %>
 
         <h2 class="card-title"><%= attr.title %></h2> 
         <p class="card-description"><%= attr.description %></p>  

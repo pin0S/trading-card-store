@@ -10,26 +10,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_09_022915) do
+ActiveRecord::Schema.define(version: 2020_11_09_043653) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.bigint "byte_size", null: false
+    t.string "checksum", null: false
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
   create_table "cards", force: :cascade do |t|
     t.string "title"
     t.string "description"
-    t.string "graded"
     t.integer "condition"
-    t.integer "season"
     t.integer "manufacturer"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "price"
-    t.bigint "seasons_id", null: false
-    t.bigint "teams_id", null: false
-    t.index ["seasons_id"], name: "index_cards_on_seasons_id"
-    t.index ["teams_id"], name: "index_cards_on_teams_id"
+    t.bigint "season_id", null: false
+    t.bigint "team_id", null: false
+    t.index ["season_id"], name: "index_cards_on_season_id"
+    t.index ["team_id"], name: "index_cards_on_team_id"
     t.index ["user_id"], name: "index_cards_on_user_id"
   end
 
@@ -84,8 +103,9 @@ ActiveRecord::Schema.define(version: 2020_11_09_022915) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "cards", "seasons", column: "seasons_id"
-  add_foreign_key "cards", "teams", column: "teams_id"
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "cards", "seasons"
+  add_foreign_key "cards", "teams"
   add_foreign_key "cards", "users"
   add_foreign_key "orders", "users"
   add_foreign_key "ratings", "users"

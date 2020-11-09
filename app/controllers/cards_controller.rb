@@ -6,10 +6,12 @@ class CardsController < ApplicationController
 
     def create
         @card = Card.new(card_params)
-
+        @card.save!
         if @card.save
             redirect_to @card
         else
+            @seasons = Season.all
+            @teams = Team.all
             render 'new'
         end
     end
@@ -49,6 +51,8 @@ class CardsController < ApplicationController
 
     private
         def card_params
-            params.require(:card).permit(:title, :description, :condition, :season, :manufacturer, :price)
+            params.require(:card).permit(:title, :description, :condition, 
+                :season_id, :manufacturer, :price, :picture, :team_id, 
+                :user_id)
         end
 end

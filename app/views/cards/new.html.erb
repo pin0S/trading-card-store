@@ -34,12 +34,14 @@
 
     <p>
         <%= form.label :team_id %>
-        <%=  %>
         <%= form.select(:team_id, @teams.order(team: :asc).map{ |t| [t.team, t.id] }) %>
     </p>
 
-    
-    <p>Placeholder for image upload</p>
+    <p>
+        <%= form.label :picture %>
+        <%= form.file_field :picture, accept: 'image/png, image/jpg, image/jpeg' %>
+    </p>    
+   
 
     <%= form.submit "Sell Card"%>
 
