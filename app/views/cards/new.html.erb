@@ -27,7 +27,11 @@
         <%= form.select :manufacturer, Card::manufacturers %>
     </p>
 
-    <p>Placeholder for seasons list</p>
+    <p>
+        <%= form.label :season %>
+        <%= form.select :season, Card::seasons %>
+    </p>
+    
     <p>Placeholder for teams list</p>
     <p>Placeholder for image upload</p>
 
