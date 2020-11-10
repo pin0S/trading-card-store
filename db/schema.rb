@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_09_043653) do
+ActiveRecord::Schema.define(version: 2020_11_10_024942) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2020_11_09_043653) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "price"
+    t.float "price"
     t.bigint "season_id", null: false
     t.bigint "team_id", null: false
     t.index ["season_id"], name: "index_cards_on_season_id"

@@ -21,6 +21,8 @@ class CardsController < ApplicationController
         @card = Card.new
         @seasons = Season.all
         @teams = Team.all
+        @manufacturers = Card.manufacturers.keys 
+        @condition = Card.conditions.keys
     end
 
     def update

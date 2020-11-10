@@ -1,2 +1,18 @@
 <h1>First Team Cards</h1>
 
+<div>
+
+    <%= @cards.each do |car| %>
+        <div class="card" style="width: 18rem;">
+            <%= image_tag(car.picture, :class => 'card-img-top') if car.picture.attached? %> 
+            <%# <img src="card.picture" class="card-img-top" alt="image of card.title"> %>
+            <div class="card-body">
+                <h5 class="card-title"><%=car.title%></h5>
+                <p class="card-text"><%= car.description%></p>
+                <p class="card-price"><%= number_to_currency(car.price)%></p>
+                <%= link_to 'Buy Now', card_path(car.id), class: "btn btn-primary" %>
+            </div>
+        </div>
+    <% end %>
+
+</div>

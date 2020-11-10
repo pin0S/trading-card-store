@@ -14,17 +14,17 @@
 
     <p>
         <%= form.label :price %>
-        <%= form.number_field :price %>
+        <%= form.number_field :price, step: 0.01 %>
     </p>
 
     <p>
         <%= form.label :condition %>
-        <%= form.select :condition, Card::conditions %>
+        <%= form.select(:condition, [['Graded', 'graded'], ['Brand New', 'brand_new'], ['Like New', 'like_new'], ['Used', 'used'], ['Not specified', 'not_specified']] ) %>
     </p>
 
     <p>
         <%= form.label :manufacturer %>
-        <%= form.select :manufacturer, Card::manufacturers %>
+        <%= form.select(:manufacturer, [['Upper Deck', 'upper_deck'], ['Panini', 'panini'], ['Topps', 'topps'], ['Other', 'other']] ) %>
     </p>
 
     <p>
