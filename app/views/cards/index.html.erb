@@ -1,18 +1,46 @@
-<h1>First Team Cards</h1>
 
-<div>
 
-    <%= @cards.each do |car| %>
-        <div class="card" style="width: 18rem;">
-            <%= image_tag(car.picture, :class => 'card-img-top') if car.picture.attached? %> 
-            <%# <img src="card.picture" class="card-img-top" alt="image of card.title"> %>
-            <div class="card-body">
-                <h5 class="card-title"><%=car.title%></h5>
-                <p class="card-text"><%= car.description%></p>
-                <p class="card-price"><%= number_to_currency(car.price)%></p>
-                <%= link_to 'Buy Now', card_path(car.id), class: "btn btn-primary" %>
+<div class="grid-container">
+    <%# <div class="row">
+        <div class="col">
+            <div class="sidebar">
+                <ul class="cat-sidebar">
+                    <li>Categories</li>
+                    <li>Teams</li>
+                    <li>Graded</li>
+                    <li>Price</li>
+                    <li>Condition</li>
+                    <ul>
+                        <li>Graded</li>
+                        <li>Brand New</li>
+                        <li>Like New</li>
+                        <li>Used</li>
+                        <li>Not Specified</li>
+                    </ul>
+                </ul>
             </div>
         </div>
-    <% end %>
-
+    </div> %>
+    <div>
+        <h1 class="page-header text-center ">First Team Cards</h1>
+        <% @cards.each_slice(3) do |cards| %>
+            <div class="row">
+                
+                <% cards.each do |car| %>
+                    <div class="col-sm-4">
+                        <div class="card listing" style="width: 18rem;">
+                            <%= image_tag(car.picture, :class => 'card-img-top') if car.picture.attached? %> 
+                            <div class="card-body">
+                                <h5 class="card-title"><%= car.title %></h5>
+                                <%# <p class="card-text"><%= car.description %></p> %>
+                                <p class="card-price"><%= number_to_currency(car.price) %></p>
+                                <%= link_to 'Buy Now', card_path(car.id), class: "btn btn-primary" %>
+                            </div>
+                        </div>
+                    </div>
+                <%end%>
+                
+            </div>
+        <%end%>
+    </div>
 </div>
