@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  devise_for :users
   root 'cards#index'
+  devise_for :users
 
   resources :cards
 

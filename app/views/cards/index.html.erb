@@ -24,7 +24,7 @@
     <div>
         <h1 class="page-header text-center ">First Team Cards</h1>
         <% @cards.each_slice(3) do |cards| %>
-            <div class="row">
+            <div class="row-col-3">
                 
                 <% cards.each do |car| %>
                     <div class="col-sm-4">
@@ -32,7 +32,7 @@
                             <%= image_tag(car.picture, :class => 'card-img-top') if car.picture.attached? %> 
                             <div class="card-body">
                                 <h5 class="card-title"><%= car.title %></h5>
-                                <%# <p class="card-text"><%= car.description %></p> %>
+                                <p class="card-text"><%= car.description %></p>
                                 <p class="card-price"><%= number_to_currency(car.price) %></p>
                                 <%= link_to 'Buy Now', card_path(car.id), class: "btn btn-primary" %>
                             </div>

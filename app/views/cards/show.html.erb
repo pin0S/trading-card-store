@@ -1,18 +1,16 @@
-<img src="#" alt="placeholder for user image of card for sale">
 
-
-<div class="gird-container">
+<div class="grid-container">
     
 
-    <%= image_tag @card.picture if @card.picture.attached? %>
+    <%= image_tag(@card.picture, :class => 'show-img') if @card.picture.attached? %>
 
-        <h2 class="card-title"><%= @card.title %></h2> 
-        <p class="card-description"><%= @card.description %></p>  
-        <h3 class="card-price"><%= number_to_currency(@card.price) %></h3>
-        <button>Buy Now PH</button>
-        <button>Sell Similar PH</button>
-        <p>Seller rating PH</p>
-
+        <h2 class="card-title show-title"><%= @card.title %></h2> 
+        <p class="card-description show-desc"><%= @card.description %></p>  
+        <h3 class="card-price show-rate"><%= number_to_currency(@card.price) %></h3>
+        <p class="show-rate rate">Seller rating PH</p>
+        <button class="show-buy buy">Buy Now PH</button>
+        <button class="show-buy sell">Sell Similar PH</button>
+        
         <%= link_to 'Destroy', card_path(@card),
               method: :delete,
               data: { confirm: 'Are you sure?' } %>
