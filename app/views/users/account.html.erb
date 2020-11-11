@@ -1,0 +1,6 @@
+<h1>Hello <%= current_user.username %> </h1>
+
+<h3>Items you're selling</h3>
+<% @user_listing.each do |card| %>
+    <p><%= card.title %></p>
+<% end %>

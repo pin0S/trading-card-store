@@ -44,7 +44,7 @@ class CardsController < ApplicationController
 
         session = Stripe::Checkout::Session.create(
             payment_method_types: ['card'],
-            customer_email: current_user,
+            customer_email: current_user.try(:email),
             line_items: [{
                 name: @card.title,
                 # images: @card.picture,

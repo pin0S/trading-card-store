@@ -6,4 +6,6 @@ Rails.application.routes.draw do
 
   get "payments/success", to: "payments#success"
 
+  get "/account/", to: "users#account"
+
 end
