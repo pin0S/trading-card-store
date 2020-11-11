@@ -41,6 +41,28 @@ class CardsController < ApplicationController
 
     def show
         @card = Card.find(params[:id])
+
+        session = Stripe::Checkout::Session.create(
+            payment_method_types: ['card'],
+            customer_email: current_user,
+            line_items: [{
+                name: @card.title,
+                # images: @card.picture,
+                amount: (@card.price * 100).to_i,
+                currency: 'usd',
+                quantity: 1,
+            }],
+            payment_intent_data: {
+                metadata: {
+                    card_id: @card.id
+                }
+            },
+            success_url: "#{root_url}payments/success?cardId=#{@card.id}",
+            cancel_url: "#{root_url}"
+        )
+
+        @session_id = session.id
+
     end
 
     def destroy

@@ -4,4 +4,6 @@ Rails.application.routes.draw do
 
   resources :cards
 
+  get "payments/success", to: "payments#success"
+
 end

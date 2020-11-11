@@ -8,14 +8,23 @@
         <p class="card-description show-desc"><%= @card.description %></p>  
         <h3 class="card-price show-rate"><%= number_to_currency(@card.price) %></h3>
         <p class="show-rate rate">Seller rating PH</p>
-        <button class="show-buy buy">Buy Now PH</button>
+        <button data-stripe="payment" class="show-buy buy">Buy Now</button>
+        <script src="https://js.stripe.com/v3/"></script>
         <button class="show-buy sell">Sell Similar PH</button>
         
         <%= link_to 'Destroy', card_path(@card),
               method: :delete,
               data: { confirm: 'Are you sure?' } %>
 
-
     <p>placeholder related products</p>
 </div>
+
+<script>
+    document.querySelector("[data-stripe='payment']").addEventListener("click", () => {
+        const stripe = Stripe("<%= Rails.application.credentials.dig(:stripe, :public_key) %>");
+        stripe.redirectToCheckout({
+            sessionId: "<%= @session_id %>"
+        });
+    });
+</script>
 
