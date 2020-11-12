@@ -1,16 +1,19 @@
 <h1>Sell Card</h1>
 
-<%= form_with scope: :card, url: cards_path, local: true do |form| %>
-      
-    <p>
-        <%= form.label :title %>
-        <%= form.text_field :title %>
-    </p>
 
-    <p>
-        <%= form.label :description %>
-        <%= form.text_area :description %>
-    </p>
+<form>
+    <%= form_with scope: :card, url: cards_path, local: true do |form| %>
+    
+    <div class="form-row">
+        <div class="col">
+            <%= form.label :title %>
+            <%= form.text_field :title, class: "form-control" %>
+         </div>
+
+        <div class="col">
+            <%= form.label :description %>
+            <%= form.text_area :description, class: "form-control" %>
+        </div>
 
     <p>
         <%= form.label :price %>
@@ -48,5 +51,7 @@
    
     <button type="button" class="btn btn-warning"><%= form.submit "Sell Card"%></button>
 
-<% end %>
+    <% end %>
+    </div>
+</form>
     
