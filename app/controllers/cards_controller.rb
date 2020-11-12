@@ -1,4 +1,5 @@
 class CardsController < ApplicationController
+    before_action :authenticate_user!, only:[:new, :update, :edit, :destroy]
 
     def index
         @cards = Card.all
@@ -62,7 +63,6 @@ class CardsController < ApplicationController
         )
 
         @session_id = session.id
-
     end
 
     def destroy

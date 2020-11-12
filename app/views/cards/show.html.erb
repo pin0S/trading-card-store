@@ -8,13 +8,20 @@
         <p class="card-description show-desc"><%= @card.description %></p>  
         <h3 class="card-price show-rate"><%= number_to_currency(@card.price) %></h3>
         <p class="show-rate rate">Seller rating PH</p>
-        <button data-stripe="payment" class="show-buy buy">Buy Now</button>
-        <script src="https://js.stripe.com/v3/"></script>
-        <button class="show-buy sell">Sell Similar PH</button>
         
-        <%= link_to 'Destroy', card_path(@card),
-              method: :delete,
-              data: { confirm: 'Are you sure?' } %>
+        <% if user_signed_in? %>
+            <button data-stripe="payment" class="">Buy Now</button>
+            <script src="https://js.stripe.com/v3/"></script>
+            <button class="show-buy sell">Sell Similar PH</button>
+        <% else %>
+            <%= link_to 'Buy Now', new_user_session_path  %>
+        <% end %>
+        
+        <% if user_signed_in? && current_user.id == @card.user_id %>
+            <%= button_to 'Destroy', card_path(@card),
+                method: :delete,
+                data: { confirm: 'Are you sure?' } %>
+        <% end %>
 
     <p>placeholder related products</p>
 </div>

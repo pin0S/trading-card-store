@@ -36,40 +36,15 @@
     width: 50px;
 }
 
-/*show page*/
+/* index page styling*/
 
-// .grid-container {
-//     display: grid; 
-//     width: 90vw;
-//     grid-template-columns: 1fr 1.5fr 1fr;
-//     grid-template-rows: auto;
-//     grid-template-areas: 
-//     'image heading buy'
-//     'image description rating';
-//     column-gap: 20px;
+.index {
+    width: 80vw;
+    margin: 0 auto;
+}
 
-//     img {
-//         width: 300px;
-//         height: 200px;
-//     }
-// }
-
-// .show-img {
-//     grid-area: image;
-// }
-// .show-title {
-//     grid-area: heading;
-// }
-// .show-desc {
-//     grid-area: description;
-// }
-// .show-buy {
-//     grid-area: buy;
-
-
-// }
-// .show-rate {
-//     grid-area: rating;
-// }
-
-
+.card-img-top {
+    width: 100%;
+    height: 30vw;
+    object-fit: cover;
+}

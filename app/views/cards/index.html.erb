@@ -1,6 +1,6 @@
 
 
-<div class="grid-container">
+<div class="index container-md">
     <%# <div class="row">
         <div class="col">
             <div class="sidebar">
@@ -22,19 +22,20 @@
         </div>
     </div> %>
     <div>
-        <h1 class="page-header text-center ">First Team Cards</h1>
+        <h1 class="page-header text-center ">Hardcourt Collectors</h1><br>
         <% @cards.each_slice(3) do |cards| %>
-            <div class="row-col-3">
+            <!--Grid row setup for cards -->
+            <div class="row">
                 
                 <% cards.each do |car| %>
-                    <div class="col-sm-4">
-                        <div class="card listing" style="width: 18rem;">
+                <!--Grid column setup for cards -->
+                    <div class="col-md-4 mb-4 d-flex align-items-stretch">
+                        <div class="card listing border-right border-bottom" style="width: 18rem;">
                             <%= image_tag(car.picture, :class => 'card-img-top') if car.picture.attached? %> 
                             <div class="card-body">
                                 <h5 class="card-title"><%= car.title %></h5>
-                                <p class="card-text"><%= car.description %></p>
                                 <p class="card-price"><%= number_to_currency(car.price) %></p>
-                                <%= link_to 'Buy Now', card_path(car.id), class: "btn btn-primary" %>
+                                <%= link_to 'View Card', card_path(car.id), class: "btn btn-primary" %>
                             </div>
                         </div>
                     </div>
@@ -44,3 +45,5 @@
         <%end%>
     </div>
 </div>
+
+
