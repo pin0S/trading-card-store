@@ -14,7 +14,7 @@
             <script src="https://js.stripe.com/v3/"></script>
             <button class="show-buy sell">Sell Similar PH</button>
         <% else %>
-            <%= link_to 'Buy Now', new_user_session_path  %>
+            <button><%= link_to 'Buy Now', new_user_session_path  %></button>
         <% end %>
         
         <% if user_signed_in? && current_user.id == @card.user_id %>
