@@ -27,6 +27,15 @@ class CardsController < ApplicationController
         @condition = Card.conditions.keys
     end
 
+    def edit
+        @card = Card.find(params[:id])
+
+        @seasons = Season.all
+        @teams = Team.all
+        @manufacturers = Card.manufacturers.keys 
+        @condition = Card.conditions.keys
+    end
+
     def update
         @card = Card.find(params[:id])
 
@@ -35,10 +44,6 @@ class CardsController < ApplicationController
         else
             render 'edit'
         end
-    end
-
-    def edit
-        @card = Card.find(params[:id])
     end
 
     def show

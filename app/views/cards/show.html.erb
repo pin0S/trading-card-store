@@ -12,7 +12,6 @@
         <% if user_signed_in? %>
             <button data-stripe="payment" class="">Buy Now</button>
             <script src="https://js.stripe.com/v3/"></script>
-            <button class="show-buy sell">Sell Similar PH</button>
         <% else %>
             <button><%= link_to 'Buy Now', new_user_session_path  %></button>
         <% end %>
@@ -21,6 +20,7 @@
             <%= button_to 'Destroy', card_path(@card),
                 method: :delete,
                 data: { confirm: 'Are you sure?' } %>
+            <%= link_to 'Edit Listing', edit_card_path(@card) %>
         <% end %>
 
     <p>placeholder related products</p>
