@@ -1,19 +1,29 @@
-<h1>Sell Card</h1>
 
 
-<form>
+
+
+    <h1>Sell Card</h1>
+
     <%= form_with scope: :card, url: cards_path, local: true do |form| %>
-    
-    <div class="form-row">
-        <div class="col">
-            <%= form.label :title %>
-            <%= form.text_field :title, class: "form-control" %>
-         </div>
+        <% if @card.errors.any? %>
+            <div class="form_error">
+                <ul>
+                    <% @card.errors.full_messages.each do |msg| %>
+                        <li><%='Error: ' +  msg %></li>
+                    <% end %>
+                </ul>
+            </div>
+        <% end %>
 
-        <div class="col">
-            <%= form.label :description %>
-            <%= form.text_area :description, class: "form-control" %>
-        </div>
+    <p>
+        <%= form.label :title %>
+        <%= form.text_field :title  %>
+    </p>
+
+    <p>
+        <%= form.label :description %>
+        <%= form.text_area :description %>
+    </p>
 
     <p>
         <%= form.label :price %>
@@ -53,5 +63,5 @@
 
     <% end %>
     </div>
-</form>
+
     

@@ -7,11 +7,12 @@ class CardsController < ApplicationController
 
     def create
         @card = Card.new(card_params)
-        @card.save!
+        @card.save
        
         if @card.save
             redirect_to @card
         else
+            @card.errors.full_messages
             @seasons = Season.all
             @teams = Team.all
             render 'new'
