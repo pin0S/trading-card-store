@@ -1,8 +1,9 @@
 
 
-<form class="w-50 sign-up">
+<form class="w-50 sign-up-container">
+  <div class="sign-up-form">
 
-  <h2>Sign up</h2>
+  <h3>Sign up</h3>
 
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
@@ -78,6 +79,6 @@
 
   <% end %>
   
-  
+  </div>  
 
 </form>
