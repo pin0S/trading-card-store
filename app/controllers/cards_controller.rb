@@ -1,4 +1,5 @@
 class CardsController < ApplicationController
+    before_action :set_card, only: [:show, :edit, :update, :destroy]
     before_action :authenticate_user!, only:[:new, :update, :edit, :destroy]
 
     def index
@@ -28,26 +29,20 @@ class CardsController < ApplicationController
     end
 
     def edit
-        @card = Card.find(params[:id])
-
-        @seasons = Season.all
-        @teams = Team.all
-        @manufacturers = Card.manufacturers.keys 
-        @condition = Card.conditions.keys
     end
 
     def update
-        @card = Card.find(params[:id])
 
         if @card.update(card_params)
             redirect_to @card
         else
             render 'edit'
         end
+
     end
 
     def show
-        @card = Card.find(params[:id])
+        
 
         session = Stripe::Checkout::Session.create(
             payment_method_types: ['card'],
@@ -72,13 +67,21 @@ class CardsController < ApplicationController
     end
 
     def destroy
-        @card = Card.find(params[:id])
         @card.destroy
 
         redirect_to cards_path
     end
 
     private
+
+        def set_card
+            @card = Card.find(params[:id])
+
+            @seasons = Season.all
+            @teams = Team.all
+            @manufacturers = Card.manufacturers.keys 
+            @condition = Card.conditions.keys
+        end
 
         def card_params
             params.require(:card).permit(:title, :description, :condition, 
