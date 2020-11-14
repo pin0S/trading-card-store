@@ -1,3 +1,4 @@
+
 <%= form_with scope: @card, url: cards_path, local: true do |form| %>
         <% if @card.errors.any? %>
             <div class="form_error">
@@ -9,53 +10,69 @@
             </div>
         <% end %>
 
-    <p>
+    <div class="form-group">
         <%= form.label :title %>
-        <%= form.text_field :title  %>
-    </p>
+        <%= form.text_field :title, class: "form-control"  %>
+    </div>
 
-    <p>
+    <div class="form-group">
         <%= form.label :description %>
-        <%= form.text_area :description %>
-    </p>
+        <%= form.text_area :description, class: "form-control"%>
+    </div>
 
-    <p>
+    <div class="form-group">
         <%= form.label :price %>
-        <%= form.number_field :price, step: 0.01 %>
-    </p>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">$</span>
+            </div>
+            <%= form.number_field :price, step: 0.01, class: "form-control" %>
+        </div>
+        
+    </div>
 
-    <p>
-        <%= form.label :condition %>
-        <%= form.select(:condition, [['Graded', 'graded'], ['Brand New', 'brand_new'], ['Like New', 'like_new'], ['Used', 'used'], ['Not specified', 'not_specified']] ) %>
-    </p>
+    <div class="form-row">
 
-    <p>
-        <%= form.label :manufacturer %>
-        <%= form.select(:manufacturer, [['Upper Deck', 'upper_deck'], ['Panini', 'panini'], ['Topps', 'topps'], ['Other', 'other']] ) %>
-    </p>
+        <div class="form-group col-md-6">
+            <%= form.label :condition %>
+            <%= form.select(:condition, [['Graded', 'graded'], ['Brand New', 'brand_new'], ['Like New', 'like_new'], ['Used', 'used'], ['Not specified', 'not_specified']], {}, { class: "custom-select" })  %>
+        </div>
 
-    <p>
-        <%= form.label :season_id %>
-        <%= form.select(:season_id, @seasons.map{ |s| [s.years, s.id] }) %>
-    </p>
+        <div class="form-group col-md-6">
+            <%= form.label :manufacturer %>
+            <%= form.select(:manufacturer, [['Upper Deck', 'upper_deck'], ['Panini', 'panini'], ['Topps', 'topps'], ['Other', 'other']], {}, { class: "custom-select" } ) %>
+        </div>
+    </div>
 
-    <p>
-        <%= form.label :team_id %>
-        <%= form.select(:team_id, @teams.order(team: :asc).map{ |t| [t.team, t.id] }) %>
-    </p>
+    <div class="form-row">
+        
+        <div class="form-group col-md-6">
+            <%= form.label :season_id %>
+            <%= form.select(:season_id, @seasons.map{ |s| [s.years, s.id] }, {}, { class: "custom-select" })  %>
+        </div>
+
+        <div class="form-group col-md-6">
+            <%= form.label :team_id %>
+            <%= form.select(:team_id, @teams.order(team: :asc).map{ |t| [t.team, t.id] }, {}, { class: "custom-select" }) %>
+        </div>
+    
+    </div>
 
     <% form.hidden_field :user_id, value: current_user.id %>
 
-    <p>
-        <%= form.label :picture %>
-        <%= form.file_field :picture, accept: 'image/png, image/jpg, image/jpeg' %>
-    </p>
+    <div class="custom-file">
+        <%= form.label :picture, class: "custom-file-label" %>
+        <%= form.file_field :picture, accept: 'image/png, image/jpg, image/jpeg', placeholder: "Choose Picture", class: "custom-file-input btn btn-outline-secondary" %>
+    </div>
 
+    <br><br>
     
-   
-    <button type="button" class="btn btn-warning"><%= form.submit "Sell Card"%></button>
+    <div class="form-group">
+        <%= form.submit "Sell Card", class: "btn btn-primary"%>
+    </div>
 
     <% end %>
-   
+
+
 
     
