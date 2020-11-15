@@ -1,30 +1,77 @@
-
-<div class="grid-container">
-    
-
-    <%= image_tag(@card.picture, :class => 'show-img') if @card.picture.attached? %>
-
-        <h2 class="card-title show-title"><%= @card.title %></h2> 
-        <p class="card-description show-desc"><%= @card.description %></p>  
-        <h3 class="card-price show-rate"><%= number_to_currency(@card.price) %></h3>
-        <p class="show-rate rate">Seller rating PH</p>
+<section class="container card-show">
+    <div class="row">
+        <div class='col-md-8'>
+            <div class="bg-light text-dark">
+                <h2 class=""><%= @card.title %></h2>
+            
         
-        <% if user_signed_in? %>
-            <button data-stripe="payment" class="">Buy Now</button>
-            <script src="https://js.stripe.com/v3/"></script>
-        <% else %>
-            <button><%= link_to 'Buy Now', new_user_session_path  %></button>
-        <% end %>
+            
+                <%= image_tag(@card.picture, :class => 'show-img') if @card.picture.attached? %>
         
-        <% if user_signed_in? && current_user.id == @card.user_id %>
-            <%= button_to 'Destroy', card_path(@card),
-                method: :delete,
-                data: { confirm: 'Are you sure?' } %>
-            <%= link_to 'Edit Listing', edit_card_path(@card) %>
-        <% end %>
 
-    <p>placeholder related products</p>
-</div>
+                <div class="">
+
+                    <h3 class="">Description</h3>
+                    <%= @card.description %>  
+
+
+                    <h3>Product Details</h3>
+                    <table class="table bg-light">            
+                        <tr>
+                            <td class="font-weight-bold">Condition:</td>
+                            <td class=""><%=@card.condition.capitalize%></td>
+                        </tr>
+
+                        <tr>
+                            <td class=" font-weight-bold">Manufacturer:</td>
+                            <td class=""><%=@card.manufacturer.capitalize%></td>
+                        </tr>
+
+                        <tr>
+                            <td class=" font-weight-bold">Season:</td>
+                            <td class=""><%=@card.season_id%></td>
+                        </tr>
+
+                        <tr>
+                            <td class=" font-weight-bold">Team:</td>
+                            <td class=""><%=@card.team_id%></td>
+                        </tr>
+                    </table>
+                
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <h4 class="text-center"><%= number_to_currency(@card.price) %></h4>
+            <p class="text-center">Sold by <%= @card.user_id %></p>
+
+            <div class="row">
+                <div class="col">
+                <% if user_signed_in? %>
+                    <button data-stripe="payment" class="btn btn-primary">Buy Now</button>
+                    <script src="https://js.stripe.com/v3/"></script>
+                <% else %>
+                    <%= button_to 'Buy Now', new_user_session_path, class: 'btn btn-primary'  %>
+                <% end %>
+                </div>
+                
+                
+                <% if user_signed_in? && current_user.id == @card.user_id %>
+                    <div class="col">
+                        <%= button_to 'Edit Card', edit_card_path(@card), class: "btn btn-warning" %>
+                    </div>
+                    <div class="col">
+                        <%= button_to 'Destroy', card_path(@card),
+                            method: :delete, class: "btn btn-danger",
+                            data: { confirm: 'Are you sure?' } %>
+                    </div>
+                <% end %>
+            </div>
+            
+        </div>
+    </div>
+</section>
 
 <script>
     document.querySelector("[data-stripe='payment']").addEventListener("click", () => {
