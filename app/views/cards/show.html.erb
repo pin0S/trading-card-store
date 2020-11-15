@@ -42,27 +42,36 @@
             </div>
         </div>
         
-    <div class=col-md-4>
-        <h4 class="text-center"><%= number_to_currency(@card.price) %></h4>
-        <p class="text-center">Sold by <%= @card.user_id %></p>
-    </div>
+        <div class="col-md-4">
+            <h4 class="text-center"><%= number_to_currency(@card.price) %></h4>
+            <p class="text-center">Sold by <%= @card.user_id %></p>
+
+            <div class="row">
+                <div class="col">
+                <% if user_signed_in? %>
+                    <button data-stripe="payment" class="btn btn-primary">Buy Now</button>
+                    <script src="https://js.stripe.com/v3/"></script>
+                <% else %>
+                    <%= button_to 'Buy Now', new_user_session_path, class: 'btn btn-primary'  %>
+                <% end %>
+                </div>
+                
+                
+                <% if user_signed_in? && current_user.id == @card.user_id %>
+                    <div class="col">
+                        <%= button_to 'Edit Card', edit_card_path(@card), class: "btn btn-warning" %>
+                    </div>
+                    <div class="col">
+                        <%= button_to 'Destroy', card_path(@card),
+                            method: :delete, class: "btn btn-danger",
+                            data: { confirm: 'Are you sure?' } %>
+                    </div>
+                <% end %>
+            </div>
+            
+        </div>
     </div>
 </section>
-
-
-<% if user_signed_in? %>
-            <button data-stripe="payment" class="">Buy Now</button>
-            <script src="https://js.stripe.com/v3/"></script>
-        <% else %>
-            <button><%= link_to 'Buy Now', new_user_session_path  %></button>
-        <% end %>
-        
-        <% if user_signed_in? && current_user.id == @card.user_id %>
-            <%= button_to 'Destroy', card_path(@card),
-                method: :delete,
-                data: { confirm: 'Are you sure?' } %>
-            <%= link_to 'Edit Listing', edit_card_path(@card) %>
-        <% end %>
 
 <script>
     document.querySelector("[data-stripe='payment']").addEventListener("click", () => {

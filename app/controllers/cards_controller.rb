@@ -42,7 +42,6 @@ class CardsController < ApplicationController
     end
 
     def show
-        
 
         session = Stripe::Checkout::Session.create(
             payment_method_types: ['card'],
