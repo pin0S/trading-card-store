@@ -1,23 +1,14 @@
 class Conversation < ApplicationRecord
-    belongs_to :sender, class_name: "User", foreign_key: "sender_id"
-    belongs_to :receiver, class_name: "User", foreign_key: "receiver_id"
-    has_many :messages, dependent: :destroy
+  belongs_to :sender, foreign_key: :sender_id, class_name: "User"
+  belongs_to :recipient, foreign_key: :recipient_id, class_name: "User"
 
-    validates_uniqueness_of :sender_id, scope: :receiver_id
+  has_many :messages
 
-    #sanitise uniqueness check for conversations so under sender and recieve can view them
-    scope :between, -> (sender_id,receiver_id) do
-        where("(conversations.sender_id = ? AND conversations.receiver_id = ?) OR 
-        (conversations.receiver_id = ? AND conversations.sender_id = ?)", 
-        sender_id, receiver_id, sender_id, receiver_id)
-    end
+  validates_uniqueness_of :sender_id, scope: :recipient_id
 
-    def recipient(current_user)
-        self.sender_id == current_user.id ? self.receiver : self.sender
-    end
+  # This scope validation takes the sender_id and recipient_id for the conversation and checks whether a conversation exists between the two ids because we only want two users to have one conversation.
 
-    def unread_message_count(current_user)
-        self.messages.where("user_id != ? AND read = ?", current_user.id, false).count
-    end
-
+  scope :between, -> (sender_id, recipient_id) do
+    where("(conversations.sender_id = ? AND conversations.recipient_id = ?) OR (conversations.sender_id = ? AND conversations.recipient_id = ?)", sender_id, recipient_id, recipient_id, sender_id)
   end
+end

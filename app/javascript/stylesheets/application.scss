@@ -1,6 +1,28 @@
 @import './bootstrap_custom.scss';
 @import '../../assets/stylesheets/cards';
 
+
+/*navbar styling*/
+
+.nav {
+    background-color: #264653;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: #fff;
+}
+
+.navbar-light .navbar-nav .nav-link:hover {
+    color: #F4A261;
+}
+
+
+
+
+.links {
+    
+}
+
 .card-price {
     font-weight: 900;
 }

@@ -1,10 +1,6 @@
 Rails.application.routes.draw do
 
-  #root to landing page for the app
-  root 'cards#index'
-
-  #devise user routes
-  devise_for :users
+ 
 
   #routes for main functions of the application
   resources :cards
@@ -16,7 +12,13 @@ Rails.application.routes.draw do
   get "/account/", to: "users#account"
 
   #configure routes for messenger
-  resources :conversations, only: [:index, :create] do
-    resources :messages, only: [:index, :create]
-    end
+  resources :conversations do
+    resources :messages
+  end
+
+   #root to landing page for the app
+   root 'cards#index'
+
+   #devise user routes
+   devise_for :users
 end

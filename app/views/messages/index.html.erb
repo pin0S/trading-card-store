@@ -1,18 +1,59 @@
-<ul>
+
+
+<!-- 
+<% if @over_ten %>
+  <%= link_to "Show previous", '?m=all', class:'button is-link' %>
+<% end %>
+
+<div id="" class="">
   <% @messages.each do |message| %>
     <% if message.body %>
-      <li>
-        <h4><%= message.user.username %></h4>
-        <p><%= message.body %></p>
-      </li>
+      <% user = User.find(message.user_id) %>
+      <div class="">
+        <div class="">
+          <div class="inline-block"><strong><%= user.username %></strong> <%= message.message_time %></div>
+          <div class="block pt4">
+            <div class="f4"><%= message.body %></div>
+          </div>
+        </div>
+      </div>
     <% end %>
   <% end %>
-</ul>
+</div>
 
 <%= form_for [@conversation, @message] do |f| %>
-  <div class="field">
-    <%= f.text_area :body, placeholder: "Your message" %>
+  <%= f.text_area :body, placeholder: "Inquire about a card..." %>
+  <%= f.text_field :user_id, value: current_user.id, type: "hidden"  %>
+  <div class="text-align-right">
+    <%= f.submit "Send message", class: "button is-link is-large mt3" %>
   </div>
-
-  <%= f.submit "Send" %>
 <% end %>
+
+-->
+<div class=container>
+    <h1 class="">Message <%= @conversation.recipient.username %></h1>
+
+    <div id="messages">
+    <% @messages.each do |message| %>
+        <% if message.body %>
+        <div class="media">
+            <div class="media-left">
+            <%= message.user.username %>
+            </div>
+            <div class="media-body">
+            <h5 class="media-heading"><%= message.user.username %> <small class="text-muted"><%= message.message_time %></small></h5>
+            <p><%= message.body %></p>
+            </div>
+        </div>
+        <% end %>
+    <% end %>
+    </div>
+
+    <%= form_for [@conversation, @message] do |f| %>
+    <div class="form-group">
+        <%= f.text_area :body, autofocus: true, placeholder: "Your message", class: "form-control", rows: 5 %>
+    </div>
+
+    <%= f.submit "Send", class: "btn btn-primary pull-right" %>
+    <% end %>
+</div>

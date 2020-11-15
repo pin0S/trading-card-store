@@ -1,24 +1,33 @@
+<div class="container">
+
+    <h1>Inbox</h1>
+
+    <div class=”ui list”>
+        <div class=”item”>
+            <% @conversations.each do |conversation| %>
+                <% if conversation.sender_id == current_user.id || conversation.recipient_id == current_user.id %>
+                <% if conversation.sender_id == current_user.id %>
+                    <% recipient = User.find(conversation.recipient_id) %>
+                <% else %>
+                    <% recipient = User.find(conversation.sender_id) %>
+                <% end %>
+                    <%= link_to recipient.username, conversation_messages_path(conversation)%> 
+
+                <% end %>
+            <% end %>
+        </div>
+    </div>
+</div>
+
+
 <div class="row">
   <div class="col-md-8">
     <ul class="list-group">
       <% @conversations.each do |conversation| %>
         <li class="list-group-item" data-conversation-id="<%= conversation.id %>">
-          <%= link_to conversation.recipient(current_user).username, conversation_messages_path(conversation) %>
-          <% if !conversation.unread_message_count(current_user).zero? %>
-            <span class="badge"><%= conversation.unread_message_count(current_user) %></span>
-          <% end %>
-        </li>
-      <% end %>
-    </ul>
-  </div>
-  <div class="col-md-4">
-    <div class="form-group">
-      <input id="search" placeholder="Search" class="form-control">
-    </div>
-    <ul id="users" class="list-group">
-      <% @users.each do |user| %>
-        <li class="list-group-item" data-searchstring="<%= user.username %> <%= user.username %>">
-          <%= link_to user.username, conversations_path(sender_id: current_user.id, receiver_id: user.id), method: :post %>
+          <%= link_to conversation.recipient.username, conversation_messages_path(conversation)%>
+         
+         
         </li>
       <% end %>
     </ul>
