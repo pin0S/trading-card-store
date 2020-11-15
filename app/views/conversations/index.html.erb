@@ -26,8 +26,7 @@
       <% @conversations.each do |conversation| %>
         <li class="list-group-item" data-conversation-id="<%= conversation.id %>">
           <%= link_to conversation.recipient.username, conversation_messages_path(conversation)%>
-         
-         
+      
         </li>
       <% end %>
     </ul>
