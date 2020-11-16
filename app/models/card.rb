@@ -5,8 +5,8 @@ class Card < ApplicationRecord
   
   validates :price, numericality: { greater_than: 0 }
   
-  belongs_to :seller, class_name: 'Cards'
-  belongs_to :buyer, class_name: 'Cards', optional: true
+  belongs_to :seller, class_name: 'User'
+  belongs_to :buyer, class_name: 'User', optional: true
   has_one :season  
   has_one :team
   has_one_attached :picture

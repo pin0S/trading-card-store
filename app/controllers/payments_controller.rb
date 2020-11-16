@@ -14,13 +14,13 @@ class PaymentsController < ApplicationController
         card.purchased = true
         card.save
         
-        # order = Order.create(buyer: buyer_id, card_id: card_id, striperef: payment_intent.id, receipt: payment_intent.charges.data[0].receipt_url)
-        # order.save
+        order = Order.create(buyer: buyer_id, card_id: card_id, seller_id: seller_id, striperef: payment_intent.id, receipt: payment_intent.charges.data[0].receipt_url)
+        order.save
     end
 
     def success
-        # @card = current_user.orders.last.card_id
-        # @order = current_user.orders.last
+        @card = current_user.orders.last.card_id
+        @order = current_user.orders.last
     end
 
 end

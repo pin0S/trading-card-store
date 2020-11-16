@@ -7,8 +7,9 @@ class CardsController < ApplicationController
     end
 
     def create
-        @card = Card.new(card_params)
-        @card.save
+        @card = current_user.cards.build(card_params)
+        # @card = Card.new(card_params)
+        # @card.save
        
         if @card.save
             redirect_to @card
@@ -87,6 +88,6 @@ class CardsController < ApplicationController
         def card_params
             params.require(:card).permit(:title, :description, :condition, 
                 :season_id, :manufacturer, :price, :picture, :team_id, :seller_id,
-                :purchased).merge(seller_id: current_user)
+                :purchased)
         end
 end

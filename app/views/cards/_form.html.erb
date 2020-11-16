@@ -1,4 +1,3 @@
-
 <%= form_with scope: @card, url: cards_path, local: true do |form| %>
         <% if @card.errors.any? %>
             <div class="form_error">
@@ -58,7 +57,7 @@
     
     </div>
 
-    <% form.hidden_field :seller, value: current_user.id %>
+    <% form.hidden_field :seller_id, value: current_user.id %>
 
     <div class="custom-file">
         <%= form.label :picture, class: "custom-file-label" %>

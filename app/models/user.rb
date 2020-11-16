@@ -9,7 +9,7 @@ class User < ApplicationRecord
     too_long: "%{count} characters is the maximum allowed" } 
 
   # has_many :ratings
-  has_many :cards, dependent: :destroy
+  has_many :cards, dependent: :destroy, foreign_key: :seller_id
   has_many :orders
 
   has_many :sales, class_name: 'Order', foreign_key: :seller_id
