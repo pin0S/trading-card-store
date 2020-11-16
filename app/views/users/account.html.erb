@@ -1,6 +1,85 @@
-<h1>Hello <%= current_user.username %> </h1>
+<div>
 
-<h3>Items you're selling</h3>
-<% @user_listing.each do |card| %>
-    <p><%= card.title %></p>
-<% end %>
+    <a href="#purchased">link to bought</a>
+    <a href="#selling">link to selling</a>
+    <a href="#sold">link to sold</a>
+
+    <h1>Hello <%= current_user.username %> </h1>
+
+    <div class="acct-head">
+        <a name="#selling"><h3>Items you're selling</h3></a>
+    </div>
+    <div class="container-fluid">
+        <% @selling.each_slice(4) do |cards| %>
+        <div class="row">
+        
+            <div class="card-group align-items-stretch">
+                <% cards.each do |card| %>
+                <% if card.seller == current_user %>
+                <div class="card">
+                    <%= image_tag(card.picture, :class => 'card-img-top') if card.picture.attached? %> 
+                    <div class="card-footer">
+                        <%= link_to 'View Card', card_path(card.id), class: "btn btn-primary" %>
+                    </div>
+                </div>
+                <% end %>
+                <% end %>
+            </div>
+            
+        </div>
+        <% end %>
+    </div>
+
+    <div class="acct-head">
+        <a name="sold"><h3>Items you've sold</h3></a>
+    </div>
+
+    <div class="container-fluid">
+        <% @sold.each_slice(4) do |cards| %>
+        <div class="row">
+        
+            <div class="card-group align-items-stretch">
+                <% cards.each do |card| %>
+                <% if card.seller == current_user && card.purchased == true %>
+                <div class="card">
+                    <%= image_tag(card.picture, :class => 'card-img-top') if card.picture.attached? %> 
+                    <div class="card-footer">
+                        <%= link_to 'View Card', card_path(card.id), class: "btn btn-primary" %>
+                    </div>
+                </div>
+                <% end %>
+                <% end %>
+            </div>
+            
+        </div>
+        <% end %>
+    </div>
+
+    <div class="acct-head">
+        <a name="purchased"><h3>Items you're bought</h3></a>
+    </div>
+
+    <div class="container-fluid">
+        <% @bought.each_slice(4) do |cards| %>
+        <div class="row">
+        
+            <div class="card-group align-items-stretch">
+                <% cards.each do |card| %>
+                <% if card.buyer == current_user %>
+                <div class="card">
+                    <%= image_tag(card.picture, :class => 'card-img-top') if card.picture.attached? %> 
+                    <div class="card-footer">
+                        <%= link_to 'View Card', card_path(card.id), class: "btn btn-primary" %>
+                    </div>
+                </div>
+                <% end %>
+                <% end %>
+            </div>
+            
+        </div>
+        <% end %>
+    </div>
+
+   
+
+</div>

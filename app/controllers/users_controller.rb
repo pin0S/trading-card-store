@@ -5,7 +5,9 @@ class UsersController < ApplicationController
 
     def account
         @user = current_user
-        @user_listing = current_user.cards
+        @selling = current_user.cards
+        @bought = current_user.cards
+        @sold = current_user.cards
     end
 
     def update
