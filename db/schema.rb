@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_15_215506) do
+ActiveRecord::Schema.define(version: 2020_11_15_231316) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(version: 2020_11_15_215506) do
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "read", default: false
     t.index ["conversation_id"], name: "index_messages_on_conversation_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
@@ -77,6 +78,8 @@ ActiveRecord::Schema.define(version: 2020_11_15_215506) do
     t.bigint "seller_id", null: false
     t.bigint "buyer_id", null: false
     t.bigint "card_id", null: false
+    t.string "striperef"
+    t.string "receipt"
     t.index ["buyer_id"], name: "index_orders_on_buyer_id"
     t.index ["card_id"], name: "index_orders_on_card_id"
     t.index ["seller_id"], name: "index_orders_on_seller_id"

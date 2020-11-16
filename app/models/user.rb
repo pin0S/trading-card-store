@@ -8,6 +8,7 @@ class User < ApplicationRecord
   validates :first_name, :last_name, presence: true, length: { maximum: 50, 
     too_long: "%{count} characters is the maximum allowed" } 
 
-  has_many :ratings
+  # has_many :ratings
   has_many :cards, dependent: :destroy
+  
 end
