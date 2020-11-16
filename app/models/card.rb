@@ -2,9 +2,11 @@ class Card < ApplicationRecord
 
   validates :title, :condition, :manufacturer, :price, :picture,
   :team_id, :season_id, presence: true
+  
   validates :price, numericality: { greater_than: 0 }
   
-  belongs_to :user
+  belongs_to :seller, class_name: 'Cards'
+  belongs_to :buyer, class_name: 'Cards', optional: true
   has_one :season  
   has_one :team
   has_one_attached :picture

@@ -10,5 +10,12 @@ class User < ApplicationRecord
 
   # has_many :ratings
   has_many :cards, dependent: :destroy
+  has_many :orders
+
+  has_many :sales, class_name: 'Order', foreign_key: :seller_id
+  has_many :purchases, class_name: 'Order', foreign_key: :buyer_id
+  has_many :sold_cards, through: :sales, source: :card
+  has_many :purchased_cards, through: :purchases, source: :card
   
 end
+ 

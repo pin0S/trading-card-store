@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   resources :cards
 
   #stripe payment routes
-  get "payments/success", to: "payments#success"
+  get "/payments/success", to: "payments#success"
+  post "/payments/webhook", to: "payments#webhook"
 
   #user personal account route
   get "/account/", to: "users#account"

@@ -48,14 +48,16 @@ class CardsController < ApplicationController
             customer_email: current_user.try(:email),
             line_items: [{
                 name: @card.title,
-                # images: @card.picture,
+                # images: [@card.picture[0]],
                 amount: (@card.price * 100).to_i,
                 currency: 'usd',
                 quantity: 1,
             }],
             payment_intent_data: {
                 metadata: {
+                    user_id: current_user.id,
                     card_id: @card.id
+
                 }
             },
             success_url: "#{root_url}payments/success?cardId=#{@card.id}",
@@ -84,7 +86,7 @@ class CardsController < ApplicationController
 
         def card_params
             params.require(:card).permit(:title, :description, :condition, 
-                :season_id, :manufacturer, :price, :picture, :team_id, 
-                :user_id).merge(user: current_user)
+                :season_id, :manufacturer, :price, :picture, :team_id, :seller_id,
+                :purchased).merge(seller_id: current_user)
         end
 end

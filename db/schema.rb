@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_15_231316) do
+ActiveRecord::Schema.define(version: 2020_11_16_024952) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,16 +41,18 @@ ActiveRecord::Schema.define(version: 2020_11_15_231316) do
     t.string "description"
     t.integer "condition"
     t.integer "manufacturer"
-    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.float "price"
     t.bigint "season_id", null: false
     t.bigint "team_id", null: false
     t.boolean "purchased", default: false
+    t.bigint "seller_id"
+    t.bigint "buyer_id"
+    t.index ["buyer_id"], name: "index_cards_on_buyer_id"
     t.index ["season_id"], name: "index_cards_on_season_id"
+    t.index ["seller_id"], name: "index_cards_on_seller_id"
     t.index ["team_id"], name: "index_cards_on_team_id"
-    t.index ["user_id"], name: "index_cards_on_user_id"
   end
 
   create_table "conversations", force: :cascade do |t|
@@ -74,7 +76,6 @@ ActiveRecord::Schema.define(version: 2020_11_15_231316) do
   create_table "orders", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "user_id", null: false
     t.bigint "seller_id", null: false
     t.bigint "buyer_id", null: false
     t.bigint "card_id", null: false
@@ -83,7 +84,6 @@ ActiveRecord::Schema.define(version: 2020_11_15_231316) do
     t.index ["buyer_id"], name: "index_orders_on_buyer_id"
     t.index ["card_id"], name: "index_orders_on_card_id"
     t.index ["seller_id"], name: "index_orders_on_seller_id"
-    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "ratings", force: :cascade do |t|
@@ -131,12 +131,12 @@ ActiveRecord::Schema.define(version: 2020_11_15_231316) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "cards", "cards", column: "buyer_id"
+  add_foreign_key "cards", "cards", column: "seller_id"
   add_foreign_key "cards", "seasons"
   add_foreign_key "cards", "teams"
-  add_foreign_key "cards", "users"
   add_foreign_key "orders", "cards"
   add_foreign_key "orders", "cards", column: "seller_id"
-  add_foreign_key "orders", "users"
   add_foreign_key "orders", "users", column: "buyer_id"
   add_foreign_key "ratings", "users"
 end

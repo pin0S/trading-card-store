@@ -44,21 +44,21 @@
         
         <div class="col-md-4">
             <h4 class="text-center"><%= number_to_currency(@card.price) %></h4>
-            <p class="text-center">Sold by <%= @card.user.username %></p>
+            <p class="text-center">Sold by <%= @card.seller %></p>
 
             <div class="row">
                 <div class="col">
                 <% if user_signed_in? %>
                     <button data-stripe="payment" class="btn btn-primary">Buy Now</button>
                     <script src="https://js.stripe.com/v3/"></script>
-                    <%= button_to "Message #{@card.user.username}", conversations_path(sender_id: current_user.id, recipient_id: @card.user.id), method: "post", class: "btn btn-success" %>
+                    <%= button_to "Message #{@card.seller}", conversations_path(sender_id: current_user.id, recipient_id: @card.seller_id), method: "post", class: "btn btn-success" %>
                 <% else %>
                     <%= button_to 'Buy Now', new_user_session_path, class: 'btn btn-primary'  %>
                 <% end %>
                 </div>
                 
                 
-                <% if user_signed_in? && current_user.id == @card.user_id %>
+                <% if user_signed_in? && current_user.id == @card.seller_id %>
                     <div class="col">
                         <%= button_to 'Edit Card', edit_card_path(@card), class: "btn btn-warning" %>
                     </div>
