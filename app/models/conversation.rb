@@ -6,7 +6,8 @@ class Conversation < ApplicationRecord
 
   validates_uniqueness_of :sender_id, scope: :recipient_id
 
-  # This scope validation takes the sender_id and recipient_id for the conversation and checks whether a conversation exists between the two ids because we only want two users to have one conversation.
+  # This scope validation takes the sender_id and recipient_id for the conversation and checks whether 
+  # a conversation exists between the two ids because we only want two users to have one conversation.
 
   scope :between, -> (sender_id, recipient_id) do
     where("(conversations.sender_id = ? AND conversations.recipient_id = ?)
