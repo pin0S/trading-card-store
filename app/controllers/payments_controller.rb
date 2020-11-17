@@ -19,8 +19,20 @@ class PaymentsController < ApplicationController
     end
 
     def success
-        # @card = current_user.orders.last.card_id
-        # @order = current_user.orders.last
+        def success                
+            @card = Item.find(params["itemId"].to_i)
+    
+            transaction = @card.orders.build buyer_id: current_user.id, seller_id: card.seller.id
+            @card.purchased = true
+            @card.save
+    
+            if transaction.save
+                render 'success'
+            else
+                render 'failure'
+            end
+        end
+        
     end
 
 end
