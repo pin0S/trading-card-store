@@ -1,6 +1,6 @@
 
 <div class="acct-head">
-    <%= image_tag "account_img.png"%>
+    <%= image_tag "account_img.jpg"%>
     <h1>Hello <%= current_user.username %></h1>
 
         <ul>
@@ -32,6 +32,7 @@
                 </div>
             <% end %>
         <% end %>
+        <%= will_paginate @cards %>
     </div>
 </div>
    
@@ -58,6 +59,7 @@
                 </div>
             <% end %>
         <% end %>
+        <%= will_paginate @cards %>
     </div>
 </div>
 
@@ -83,5 +85,6 @@
                 </div>
             <% end %>
         <% end %>
+        <%= will_paginate @cards %>
     </div>
 </div>

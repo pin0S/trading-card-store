@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
- 
+  #root to landing page for the app
+  root 'cards#index'
+
+  #devise user routes
+  devise_for :users
 
   #routes for main functions of the application
   resources :cards
@@ -17,9 +21,5 @@ Rails.application.routes.draw do
     resources :messages
   end
 
-   #root to landing page for the app
-   root 'cards#index'
 
-   #devise user routes
-   devise_for :users
 end

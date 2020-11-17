@@ -12,8 +12,9 @@ class MessagesController < ApplicationController
     @message = @conversation.messages.new(message_params)
     @message.user = current_user
 
-    if @message.save
-      ActionCable.server.broadcast "messages", { conversation_id: @conversation.id }
+    if @message.errors.any?
+      render "index"
+    elsif @message.save
       redirect_to conversation_messages_path(@conversation)
     end
   end

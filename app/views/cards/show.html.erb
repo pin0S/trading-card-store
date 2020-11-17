@@ -51,7 +51,6 @@
                 <% if user_signed_in? %>
                     <button data-stripe="payment" class="btn btn-primary">Buy Now</button>
                     <script src="https://js.stripe.com/v3/"></script>
-                    <%= button_to "Message #{@card.seller.username}", conversations_path(sender_id: current_user.id, recipient_id: @card.seller_id), method: "post", class: "btn btn-success" %>
                 <% else %>
                     <%= button_to 'Buy Now', new_user_session_path, class: 'btn btn-primary'  %>
                 <% end %>
@@ -63,10 +62,12 @@
                         <%= link_to 'Edit Card', edit_card_path(@card), class: "btn btn-warning" %>
                     </div>
                     <div class="col">
-                        <%= button_to 'Destroy', card_path(@card),
+                        <%= button_to 'Delete Listing', card_path(@card),
                             method: :delete, class: "btn btn-danger",
                             data: { confirm: 'Are you sure?' } %>
                     </div>
+                <% else %>
+                    <%= button_to "Message #{@card.seller.username}", conversations_path(sender_id: current_user.id, recipient_id: @card.seller_id), method: "post", class: "btn btn-success" %>
                 <% end %>
             </div>
             
