@@ -37,6 +37,10 @@ gem 'stripe'
 #ransack for search and filters
 gem 'ransack'
 
+#pagnation 
+gem 'will_paginate-bootstrap4'
+gem "will_paginate", "~> 3.3"
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 

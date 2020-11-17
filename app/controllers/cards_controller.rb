@@ -4,7 +4,7 @@ class CardsController < ApplicationController
 
     def index
         @q = Card.ransack(params[:q])
-        @cards = @q.result(distinct: true)
+        @cards = @q.result(distinct: true).paginate(:page => params[:page], :per_page=>12)
 
     end
 
