@@ -18,4 +18,3 @@ class User < ApplicationRecord
   has_many :purchased_cards, through: :purchases, source: :card
   
 end
- 

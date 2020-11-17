@@ -4,7 +4,7 @@ class CardsController < ApplicationController
 
     def index
         @q = Card.ransack(params[:q])
-        @cards = @q.result(distinct: true).paginate(:page => params[:page], :per_page=>12)
+        @cards = @q.result(distinct: true).includes(picture_attachment: :blob).paginate(:page => params[:page], :per_page=>12)
 
     end
 
@@ -79,8 +79,9 @@ class CardsController < ApplicationController
     private
 
         def set_card
-            @card = Card.find(params[:id])
-
+            # @card = Card.includes(:seller, picture_attachment: :blob).find(params[:id])
+            @card = Card.includes(:seller, picture_attachment: :blob).find(params[:id])
+    
             @seasons = Season.all
             @teams = Team.all
             @manufacturers = Card.manufacturers.keys 

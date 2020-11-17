@@ -5,9 +5,8 @@ class UsersController < ApplicationController
 
     def account
         @user = current_user
-        @selling = current_user.cards
-        @bought = current_user.cards
-        @sold = current_user.cards
+        @cards = current_user.cards.with_attached_picture.paginate(:page => params[:page], :per_page=>8)
+        
     end
 
     def update
