@@ -1,0 +1,54 @@
+<div class="row row-cols-md-4">
+    <% @listings.each do |listing| %>
+      <% if !listing.sold %>
+        <div class="card align-items-stretch">
+          <%= link_to listing_path(listing.id) do %>
+            <%= image_tag(listing.picture, class: "card-img-top") if listing.picture.attached? %>
+          <% end %>
+        <div class="card-body">
+            <h5 class="card-title"><%= listing.brand %> <%= listing.style %></h5>
+            <p class="card-text ">Size: <%= listing.size %> (US mens)</p>
+            <p class="card-text">Price: A$<%= listing.price %></p>
+            <p class="card-text">Description: <%= listing.description %></p>
+            <p class="card-text"><small class="text-muted">Listed by <%= listing.user.username %> on <%= listing.created_at.strftime("%d/%m/%Y") %></small></p>
+            <%if user_signed_in? && listing.user.id != current_user.id %>
+              <%= link_to "Message #{listing.user.username}", conversations_path(sender_id: current_user.id, recipient_id: listing.user.id), method: "post", class: "ctrl-standard fx-sliderIn msg-btn btn-lg"%>
+            <% end %>
+        </div>
+        </div>
+      <% end %>
+    <% end %>
+</div>
+
+
+<nav class="navbar navbar-expand-md navbar-dark bg-danger">
+    <a href="/" class="navbar-brand">Brand</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar6">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse justify-content-stretch" id="navbar6">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Link <span class="sr-only">Home</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="//codeply.com">Codeply</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<% if !Conversation.where("sender_id = ? OR recipient_id = ?", current_user.id, current_user.id).unread_message_count(current_user).zero? %>
+                <%# <%= link_to 'Inbox', conversations_path, class: "nav-link float-right justify-content-end bg-danger text-white" %> %>
+              <% else %><% end %>

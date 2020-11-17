@@ -3,7 +3,9 @@ class CardsController < ApplicationController
     before_action :authenticate_user!, only:[:new, :update, :edit, :destroy]
 
     def index
-        @cards = Card.all
+        @q = Card.ransack(params[:q])
+        @cards = @q.result(distinct: true)
+
     end
 
     def create

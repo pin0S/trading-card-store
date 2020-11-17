@@ -18,11 +18,63 @@
 
 /* account styling */
 
-.acct-head {
-    background-color: rgba(38, 70, 83, 0.5);
+.acct-section {
+    background-color: rgba(38, 70, 83, 0.78);
     color: #fff;
     border-bottom: 1px #000 solid;
     margin-bottom: 1%;
+    position: relative;
+}
+
+.acct-head {
+
+    height: 330px;
+
+    h1 {
+        display: block;
+        position: absolute;
+        top: 50%;
+        margin-top: -200px;
+        color: #fff;
+        font-weight: 800;
+        background-color: #F4A261;
+        
+    }
+    
+    img {
+        width: 100vw;
+        height: 300px;
+    }
+
+    ul {
+        display: flex;
+        justify-content: space-around;
+        background-color: #264653;
+        position: relative;
+        margin-bottom: 2px;
+    }
+
+    li {
+        list-style: none;
+
+        a {
+            text-decoration: none;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        a:hover {
+            color: #F4A261;
+        }
+    }
+
+}
+
+/*message styling*/
+
+.messages-container{
+    height: 60vh;
+    width: 100%;
 }
 
 
@@ -69,7 +121,7 @@
 
 .index {
     width: 80vw;
-    margin: 0 auto;
+    margin: 5% auto;
 }
 
 .card-img-top {
