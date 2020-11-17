@@ -19,8 +19,8 @@ class PaymentsController < ApplicationController
     end
 
     def success
-        @card = current_user.orders.last.card_id
-        @order = current_user.orders.last
+        # @card = current_user.orders.last.card_id
+        # @order = current_user.orders.last
     end
 
 end
