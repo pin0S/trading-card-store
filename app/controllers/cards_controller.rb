@@ -59,7 +59,7 @@ class CardsController < ApplicationController
             payment_intent_data: {
                 metadata: {
                     user_id: current_user.id,
-                    card_id: @card.id
+                    card_id: @card.id,
                     seller_id: @card.seller.id
                 }
             },
