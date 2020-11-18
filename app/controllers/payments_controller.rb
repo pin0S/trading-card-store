@@ -20,18 +20,7 @@ class PaymentsController < ApplicationController
 
 
     def success                
-        card = Card.find(params["cardId"].to_i)
-
-        order = Order.create(buyer: current_user, card_id: card, seller_id: card.seller.id)
-        order.save
-        card.purchased = true
-        card.save
-
-        if order.save
-            render 'success'
-        else
-            
-        end
+        
     end
         
 
