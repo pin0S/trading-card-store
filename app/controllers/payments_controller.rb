@@ -12,9 +12,10 @@ class PaymentsController < ApplicationController
         card = Card.find(card_id)
 
         card.purchased = true
+        card.buyer_id = buyer_id
         card.save
         
-        order = Order.create(buyer: buyer_id, card_id: card_id, seller_id: seller_id, striperef: payment_intent.id, receipt: payment_intent.charges.data[0].receipt_url)
+        order = Order.create(buyer: buyer_id, card_id: card_id, seller_id: seller_id)
         order.save
     end
 

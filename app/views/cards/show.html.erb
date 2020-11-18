@@ -1,6 +1,6 @@
 <section class="container card-show">
     <div class="row">
-        <div class='col-md-8'>
+        <div class='col-md-8 mt-10'>
             <div class="bg-light text-dark">
                 <h2 class=""><%= @card.title %></h2>
             
@@ -52,7 +52,7 @@
                     <button data-stripe="payment" class="btn btn-primary">Buy Now</button>
                     <script src="https://js.stripe.com/v3/"></script>
                 <% else %>
-                    <%= button_to 'Buy Now', new_user_session_path, class: 'btn btn-primary'  %>
+                    <%= button_to 'Buy Now 2', new_user_session_path, class: 'btn btn-primary'  %>
                 <% end %>
                 </div>
                 
@@ -67,7 +67,7 @@
                             data: { confirm: 'Are you sure?' } %>
                     </div>
                 <% else %>
-                    <%= button_to "Message #{@card.seller.username}", conversations_path(sender_id: current_user.id, recipient_id: @card.seller_id), method: "post", class: "btn btn-success" %>
+                    <%= button_to "Message #{@card.seller.username}", conversations_path(sender_id: current_user.id, recipient_id: @card.seller.id), method: "post", class: "btn btn-success" %>
                 <% end %>
             </div>
             

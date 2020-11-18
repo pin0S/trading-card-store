@@ -191,3 +191,20 @@
     width: 50%;
     height: 50%;
 }
+
+/* messaging styling */
+
+.messages{
+    height: 70vh;
+    width: 100%;
+  }
+
+.message-yellow {
+    background-color: #E9C46A;
+    border-radius: 30px;
+}
+
+.message-green {
+    background-color: #2A9D8F;
+    border-radius: 30px;
+}

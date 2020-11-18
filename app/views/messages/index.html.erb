@@ -1,26 +1,45 @@
-<div class="container d-flex justify-content-center">
-  <div class="messages-container overflow-auto">
+<div class="container-fluid">
+  <h3>Chat session</h3>
+</div>
 
-    <% @conversation.messages.each do |message| %>
-      <% if message.body %>
-        <div class="media">
-          <div class="media-left">
-            <%= message.user.username %>
+<div class="container d-flex justify-content-center">
+  <div class="messages overflow-auto">  
+  <% @conversation.messages.each do |message| %>
+    <% if message.body %>
+      <% user = User.find(message.user_id) %>
+        <% if user.id == current_user.id %>
+          <div class="d-flex justify-content-end">
+            <p class="text-right message-yellow p-3 rounded text-white">
+              <strong><%= user.username %></strong><br>
+              <%= message.body %><br>
+              <small><%= message.message_time %></small>
+            </p>
           </div>
-          <div class="media-body">
-            <h5 class="media-heading"><%= message.user.username %> <small class="text-muted"><%= message.message_time %></small></h5>
-            <p><%= message.body %></p>
+        <% else %>
+          <div class="d-flex justify-content-start">
+            <p class="message-green p-3 rounded text-white">
+              <strong><%= user.username %></strong><br>
+              <%= message.body %><br>
+              <small><%= message.message_time %></small>
+            </p>
           </div>
-        </div>
-      <% end %>
+        <% end %>
     <% end %>
+  <% end %>
   </div>
+</div>
+ 
+  
 
   <%= form_for [@conversation, @message] do |f| %>
-    <div class="form-group">
-      <%= f.text_area :body, autofocus: true, placeholder: "Your message", class: "form-control", rows: 5 %>
-    </div>
-
-    <%= f.submit "Send", class: "btn btn-primary pull-right" %>
+    <div class="container">
+      <%= f.text_area :body, autofocus: true, placeholder: "Your message", class: "form-control", rows: 2 %>
+      <div>
+        <%= f.submit "Send", class: "btn btn-primary mt-3 btn-send" %>
+      </div>
   <% end %>
-</div>
+  </div>
+ </div>
+ </div>
+
+

@@ -51,15 +51,15 @@ class CardsController < ApplicationController
             customer_email: current_user.try(:email),
             line_items: [{
                 name: @card.title,
-                # images: [@card.picture[0]],
+                # images: @card.picture,
                 amount: (@card.price * 100).to_i,
                 currency: 'usd',
                 quantity: 1,
             }],
             payment_intent_data: {
                 metadata: {
-                    user_id: current_user.id,
                     card_id: @card.id,
+                    user_id: current_user.try(:id),
                     seller_id: @card.seller.id
                 }
             },
@@ -68,6 +68,7 @@ class CardsController < ApplicationController
         )
 
         @session_id = session.id
+        
     end
 
     def destroy
@@ -80,7 +81,7 @@ class CardsController < ApplicationController
 
         def set_card
             # @card = Card.includes(:seller, picture_attachment: :blob).find(params[:id])
-            @card = Card.includes(:seller, picture_attachment: :blob).find(params[:id])
+            @card = Card.includes(:seller).with_attached_picture.find(params[:id])
     
             @seasons = Season.all
             @teams = Team.all
