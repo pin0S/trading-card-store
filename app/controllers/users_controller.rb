@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
 
     def account
-        
         @cards = current_user.cards.with_attached_picture.paginate(:page => params[:page], :per_page=>8)
     end
 
