@@ -6,7 +6,7 @@ class PaymentsController < ApplicationController
         payment = Stripe::PaymentIntent.retrieve(payment_id)
 
         card_id = payment.metadata.card_id
-        buyer_id = payment.metadata.buyer_id
+        buyer_id = payment.metadata.current_user.id
         seller_id = payment_intent.metadata.seller_id
 
         card = Card.find(card_id)
