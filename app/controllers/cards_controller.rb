@@ -60,7 +60,7 @@ class CardsController < ApplicationController
                 metadata: {
                     user_id: current_user.id,
                     card_id: @card.id
-
+                    seller_id: @card.seller.id
                 }
             },
             success_url: "#{root_url}payments/success?cardId=#{@card.id}",

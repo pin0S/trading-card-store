@@ -7,7 +7,7 @@ class PaymentsController < ApplicationController
 
         card_id = payment.metadata.card_id
         buyer_id = payment.metadata.user_id
-        seller_id = Card.find(card_id.seller_id)
+        seller_id = payment.metadata.seller_id
 
         card = Card.find(card_id)
 
