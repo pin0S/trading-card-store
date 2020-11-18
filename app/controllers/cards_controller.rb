@@ -4,7 +4,7 @@ class CardsController < ApplicationController
 
     def index
         @q = Card.ransack(params[:q])
-        @cards = @q.result(distinct: true).includes(picture_attachment: :blob).paginate(:page => params[:page], :per_page=>12)
+        @cards = @q.result.with_attached_picture.paginate(:page => params[:page], :per_page=>12)
 
     end
 

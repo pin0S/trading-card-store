@@ -25,15 +25,15 @@
         </div>
     </div> %>
     
-        
-            <% @cards.each_slice(3) do |cards| %>
-                <!--Grid row setup for cards -->
+        <!--Grid row setup for cards -->
+           
+                
                 <div class="row">
-                    <% cards.each do |car| %>
+                    <% @cards.each do |car| %>
                         <% if !car.purchased %>
                         <!--Grid column setup for cards -->
                             <div class="col-md-4 mb-4 d-flex align-items-stretch">
-                                <div class="card listing border-right border-bottom" style="width: 18rem;">
+                                <div class="card listing border-right border-bottom">
                                     <%= link_to (image_tag(car.picture, :class => 'card-img-top') if car.picture.attached?), card_path(car.id) %> 
                                     <div class="card-body">
                                         <h5 class="card-title"><%= car.title %></h5>
@@ -45,7 +45,7 @@
                         <% end %>
                     <% end %>
                 </div>
-            <% end %>
+            
         <%= will_paginate @cards %>
     </div>
 </div>
