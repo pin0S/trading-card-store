@@ -4,41 +4,19 @@
 
 <div class="index">
     <h1 class="page-header text-center ">Hardcourt Collectors</h1>
-    <%# <div class="row">
-        <div class="col">
-            <div class="sidebar">
-                <ul class="cat-sidebar">
-                    <li>Categories</li>
-                    <li>Teams</li>
-                    <li>Graded</li>
-                    <li>Price</li>
-                    <li>Condition</li>
-                    <ul>
-                        <li>Graded</li>
-                        <li>Brand New</li>
-                        <li>Like New</li>
-                        <li>Used</li>
-                        <li>Not Specified</li>
-                    </ul>
-                </ul>
-            </div>
-        </div>
-    </div> %>
     
         <!--Grid row setup for cards -->
-           
-                
                 <div class="row">
-                    <% @cards.each do |car| %>
-                        <% if !car.purchased %>
+                    <% @cards.each do |card| %>
+                        <% if !card.purchased %>
                         <!--Grid column setup for cards -->
                             <div class="col-md-4 mb-4 d-flex align-items-stretch">
                                 <div class="card listing border-right border-bottom">
-                                    <%= link_to (image_tag(car.picture, :class => 'card-img-top') if car.picture.attached?), card_path(car.id) %> 
+                                    <%= link_to (image_tag(card.picture, :class => 'card-img-top') if card.picture.attached?), card_path(card.id) %> 
                                     <div class="card-body">
-                                        <h5 class="card-title"><%= car.title %></h5>
-                                        <p class="card-price"><%= number_to_currency(car.price) %></p>
-                                        <%= link_to 'View Card', card_path(car.id), class: "btn btn-primary" %>
+                                        <h5 class="card-title"><%= card.title %></h5>
+                                        <p class="card-price"><%= number_to_currency(card.price) %></p>
+                                        <%= link_to 'View Card', card_path(card.id), class: "btn btn-primary" %>
                                     </div>
                                 </div>
                             </div>
